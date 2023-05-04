@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.header .mdc-tab__text-label {
+  color: white !important;
+}
+
+
+.h2 .mdc-tab__text-label {
+  color: #aa2824 !important;
+  font-weight: bold;
+}
+
+.mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline, .mat-mdc-tab-link:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline {
+  border-color: white;
+}
+
+.mat-mdc-unelevated-button.mat-unthemed {
+  --mdc-filled-button-container-color: #aa2824;
+  --mdc-filled-button-label-text-color: #FFF;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.content-text {
+  text-align: center;
+  text-justify: auto;
+  vertical-align: top;
+  margin-top: 5%;
+  font-size: 17px;
+}
+
+.padding-left-5 {
+  padding-left: 5%;
+}
+
+
+.padding-left-3 {
+  padding-left: 3%;
+}

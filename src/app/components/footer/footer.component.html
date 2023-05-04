@@ -1,0 +1,27 @@
+<mat-grid-list cols="3" rowHeight="10:1" gutterSize="0px" class="bottom_footer">
+  <mat-grid-tile-header>
+    <mat-grid-tile
+      *ngFor="let tile of tiles"
+      [colspan]="tile.cols"
+      [rowspan]="tile.rows"
+      [style.background]="tile.color">
+
+      <div [ngSwitch]="tile.id" class="footer">
+        <div *ngSwitchCase="1">
+          <h3>CORPO NAZIONALE DEI VIGILI DEL FUOCO</h3>
+          <i>Dipartimento dei Vigili del Fuoco, del Soccorso Pubblico e della Difesa Civile</i>
+        </div>
+        <div *ngSwitchCase="2">
+
+        </div>
+        <div *ngSwitchCase="3">
+
+        </div>
+        <div *ngSwitchCase="4">
+
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-tile-header>
+
+</mat-grid-list>

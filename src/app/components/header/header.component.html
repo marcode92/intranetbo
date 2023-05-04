@@ -1,0 +1,48 @@
+<mat-grid-list cols="5" rowHeight="3:1" gutterSize="0px">
+  <mat-grid-tile-header>
+    <mat-grid-tile
+      *ngFor="let tile of tiles"
+      [colspan]="tile.cols"
+      [rowspan]="tile.rows"
+      [style.background]="tile.color">
+
+      <div [ngSwitch]="tile.id" class="header">
+        <div *ngSwitchCase="1">
+          <img src="assets/logo.png" class="logo" width="auto" height="250px">
+        </div>
+        <div *ngSwitchCase="2">
+          <h2>COMANDO PROVINCIALE VV.F. bologna</h2>
+          <i>Servizio Intranet</i>
+          <br><i> bologna</i>
+        </div>
+        <div *ngSwitchCase="3">
+          <i> comando.bologna@vigilfuoco.it</i><br>
+          <i> com.bologna@cert.vigilfuoco.it</i><br>
+          <i> com.prev.bologna@cert.vigilfuoco.it</i><br>
+          <i> com.salaop.bologna@cert.vigilfuoco.it</i><br>
+        </div>
+        <div *ngSwitchCase="4">
+          <section>
+            <div class="example-button-row" *ngFor="let link of links">
+              <a mat-flat-button href={{link.link}} target="_blank">{{link.label}}</a>
+            </div>
+          </section>
+        </div>
+        <div *ngSwitchCase="5">
+          <nav mat-tab-nav-bar>
+            <a mat-tab-link *ngFor="let tab of tabs"
+              [routerLink]='tab.redirect'
+              routerLinkActive #rla="routerLinkActive"
+              [routerLinkActiveOptions]="{exact:true}"
+              [active]="rla.isActive">
+              <h3>{{tab.label}}</h3>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-tile-header>
+
+</mat-grid-list>
+
+<!--<a routerLink={{tab.redirect}}><\a>-->

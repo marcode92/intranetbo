@@ -1,0 +1,32 @@
+.example-container {
+  width: 100%;
+  height: 100%;
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
+}
+
+
+.mat-drawer, .example-sidenav, .ng-trigger, .ng-trigger-transform, .mat-drawer-side, .mat-drawer-opened {
+  min-width: 25%;
+  width: auto;
+}
+
+h2, h3{
+  color: #aa2824;
+  text-align: center;
+}
+
+.content-text-title {
+  color:#aa2824;
+  font-weight: bold;
+  font-size: 18px;
+}

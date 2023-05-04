@@ -1,0 +1,18 @@
+h2, h3 {
+  color: #aa2824;
+  text-align: center;
+}
+
+.mat-mdc-list-item-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.center_odg {
+  margin-left:15%;
+  margin-right:15%;
+}
+
+
+.mat-mdc-form-field {
+  display:unset;
+}
