@@ -1,0 +1,12 @@
+<form class="example-form" [formGroup]="form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Username</mat-label>
+      <input matInput value="Username" formControlName="username">
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password">
+      </mat-form-field>
+    <button (click) ="submit()">submit</button>
+  </form>

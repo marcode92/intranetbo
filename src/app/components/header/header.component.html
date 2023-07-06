@@ -15,11 +15,16 @@
           <i>Servizio Intranet</i>
           <br><i> bologna</i>
         </div>
-        <div *ngSwitchCase="3">
+     <!--    <div *ngSwitchCase="3">
           <i> comando.bologna@vigilfuoco.it</i><br>
           <i> com.bologna@cert.vigilfuoco.it</i><br>
           <i> com.prev.bologna@cert.vigilfuoco.it</i><br>
           <i> com.salaop.bologna@cert.vigilfuoco.it</i><br>
+        </div> -->
+        <div *ngSwitchCase="3">
+          <button (click)="login()">
+            Accedi
+          </button>
         </div>
         <div *ngSwitchCase="4">
           <section>

@@ -43,6 +43,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CovidComponent,
     NumeriServizioInformaticoComponent,
     ModelliDocumentiComponent,
-    LifmComponent
+    LifmComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 export interface Tile {
@@ -27,7 +28,8 @@ export interface Link {
 })
 export class HeaderComponent implements OnInit{
 
-  constructor() {};
+  constructor( private route: ActivatedRoute,
+    private router: Router) {};
 
   ngOnInit(): void {
 
@@ -68,6 +70,11 @@ export class HeaderComponent implements OnInit{
     {label: 'StatRi-Web', link: 'https://statri-web.dipvvf.it'},
     {label: 'Protezione Civile', link: 'https://www.protezionecivile.gov.it/it/'},
   ]
+
+  login(){
+    this.router.navigate(['login'], { relativeTo: this.route });
+
+  }
 }
 
 

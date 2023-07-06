@@ -4,7 +4,6 @@ import { ArchivioComponent } from './components/archivio/archivio.component';
 import { ContattiComponent } from './components/contatti/contatti.component';
 import { CovidComponent } from './components/covid/covid.component';
 import { DdsComponent } from './components/dds/dds.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { LifmComponent } from './components/lifm/lifm.component';
 import { LinkComponent } from './components/link/link.component';
@@ -22,9 +21,11 @@ import { ServizioInformaticoComponent } from './components/servizio-informatico/
 import { SettoriOperativiComponent } from './components/settori-operativi/settori-operativi.component';
 import { SoftwareComponent } from './components/software/software.component';
 import { UfficiComponent } from './components/uffici/uffici.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
+  { path: "login", component: LoginComponent},
   { path: "odg", component: OdgComponent},
   { path: "dds", component: DdsComponent},
   { path: "archivio", component: ArchivioComponent},
