@@ -18,7 +18,7 @@ export class LoginComponent {
   }
   submit(){
     this.vvfapiService.loginUser(this.form.controls.username.value!, this.form.controls.password.value!).subscribe((res:any)=>{
-      console.log(res);
+      console.log("response of api:",res);
     })
     
     
