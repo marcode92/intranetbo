@@ -11,8 +11,8 @@ export class VvfapiService {
   constructor(private http: HttpClient) { }
 
   getUtentiBySede(codice: string) {
-    console.log(url + `Personale?codiciSede=`+ codice);
-    return this.http.get(url + `Personale?codiciSede=`+ codice)
+    console.log(url + `Personale?codiciSede=` + codice);
+    return this.http.get(url + `Personale?codiciSede=` + codice)
   }
 
   getMezziBySede(codice: string) {
@@ -21,8 +21,12 @@ export class VvfapiService {
   }
 
   getSedi(requestUrl: string) {
-    console.log(url+requestUrl);
+    console.log(url + requestUrl);
     return this.http.get(url + requestUrl)
   }
 
+  loginUser(username: string, password: string) {
+    return this.http.request('POST',`http://localhost:3000/login`, {body:{username, password}} )
+  }
+  
 }

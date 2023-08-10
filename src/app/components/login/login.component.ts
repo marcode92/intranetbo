@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { VvfapiService } from 'src/app/services/vvfapi.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,14 @@ export class LoginComponent {
     password: new FormControl(''),
   });
 
+  constructor(private readonly vvfapiService: VvfapiService){
+
+  }
   submit(){
-    console.log(this.form.controls.username.value)
+    this.vvfapiService.loginUser(this.form.controls.username.value!, this.form.controls.password.value!).subscribe((res:any)=>{
+      console.log(res);
+    })
+    
+    
   }
 }
