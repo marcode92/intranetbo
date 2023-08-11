@@ -41,7 +41,7 @@ app.post('/login', (req, res, next) => {
             console.log('ERROR new connection' + err);
         } else {
          new Promise((resolve, reject) => {
-                items = [];
+                items = {};
 
                 client.search(
                     "OU=Sede,dc=bo,dc=dipvvf,dc=it",
@@ -53,31 +53,26 @@ app.post('/login', (req, res, next) => {
                             return
                         }
 
-                        res.on('searchRequest', (searchRequest) => {
-                            // console.log('searchRequest: ', searchRequest.baseObject);
-                        });
+                        /* res.on('searchRequest', (searchRequest) => {
+                        }); */
                         res.on('searchEntry', (entry) => {
-                            index = index + 1
-                            items.push(entry.objectName.toString())
-                            //  console.log('entry: ' + entry.objectName + index);
+                           items = {
+                                nome: entry.attributes.filter(x => x.type === 'givenName' )[0].values[0].toString(),
+                                cognome: entry.attributes.filter(x => x.type === 'sn' )[0].values[0].toString(),                                
+                            }                            
+                            console.log('entry: ', items);
                         });
-                        res.on('searchReference', (referral) => {
-                            //console.log('referral: ' + referral.uris.join());
+                       /*  res.on('searchReference', (referral) => {
                         });
                         res.on('error', (err) => {
-                            //console.error('error: ' + err.message);
-                        });
+                        }); */
                         res.on('end', (x) => {
-                            //console.log('print: ' + x?.status);
-                            //console.log(items);
                             resolve(items);
                         });
                     })
             }).then(x => res.send(x))
         }
     })
-
-
 })
 
 
