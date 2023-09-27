@@ -1,1 +1,12 @@
-<p>correct-presence works!</p>
+<form class="presence-form" [formGroup]="form">
+    <mat-form-field class="presence-full-width">
+      <mat-label>Giorno da corregere</mat-label>
+      <input matInput value="day" formControlName="day">
+    </mat-form-field>
+  
+    <mat-form-field class="presence-full-width">
+        <mat-label>CAPOTURNO</mat-label>
+        <input matInput value="capoturno" formControlName="capoturno">
+      </mat-form-field>
+    <button (click) ="submit()">submit</button>
+  </form>

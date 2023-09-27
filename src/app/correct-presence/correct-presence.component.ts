@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-correct-presence',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class CorrectPresenceComponent {
 
+  form = new FormGroup({
+    username: new FormControl('', Validators.minLength(1)),
+    password: new FormControl(''),
+  });
 }
