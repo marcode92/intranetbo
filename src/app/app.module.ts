@@ -44,6 +44,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginComponent } from './components/login/login.component';
+import { CorrectPresenceComponent } from './correct-presence/correct-presence.component';
   
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { LoginComponent } from './components/login/login.component';
     NumeriServizioInformaticoComponent,
     ModelliDocumentiComponent,
     LifmComponent,
-    LoginComponent
+    LoginComponent,
+    CorrectPresenceComponent
   ],
   imports: [
     BrowserModule,
