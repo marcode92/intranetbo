@@ -22,6 +22,7 @@ import { SettoriOperativiComponent } from './components/settori-operativi/settor
 import { SoftwareComponent } from './components/software/software.component';
 import { UfficiComponent } from './components/uffici/uffici.component';
 import { LoginComponent } from './components/login/login.component';
+import { CorrectPresenceComponent } from './components/correct-presence/correct-presence.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: "link", component: LinkComponent},
   { path: "covid", component: CovidComponent},
   { path: "numeri_servizio_informatico", component: NumeriServizioInformaticoComponent},
+  { path: "correggi_transito", component: CorrectPresenceComponent},
   { path: "orari", component: OrariComponent},
   { path: "modelli_documenti", component: ModelliDocumentiComponent},
   { path: "normativa", component: NormativaComponent},

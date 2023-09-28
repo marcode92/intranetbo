@@ -44,8 +44,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginComponent } from './components/login/login.component';
-import { CorrectPresenceComponent } from './correct-presence/correct-presence.component';
-  
+import { CorrectPresenceComponent } from './components/correct-presence/correct-presence.component';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,8 +93,11 @@ import { CorrectPresenceComponent } from './correct-presence/correct-presence.co
     MatSidenavModule,
     MatTreeModule,
     MatInputModule,
+    MatDatepickerModule, 
+    MatNativeDateModule,
     HttpClientModule,
     MatAutocompleteModule,
+    MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
     MatDividerModule,

@@ -1,0 +1,18 @@
+<form class="presence-form" [formGroup]="formRequest" (ngSubmit)="onSubmit()">
+  <mat-form-field >
+    <mat-label>Choose a date</mat-label>
+    <input matInput formControlName="day" [matDatepicker]="picker">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Capoturno</mat-label>
+    <mat-select formControlName="capoturno">
+      <mat-option *ngFor="let approver of approvers" >
+        {{ approver.nome }} {{ approver.cognome }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button type="submit" [disabled]="!formRequest.valid">Submit</button>
+  </form>
