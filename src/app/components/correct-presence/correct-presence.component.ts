@@ -29,23 +29,26 @@ export class CorrectPresenceComponent {
   }
 
   ngOnInit() {
-    this.filter("demata")
-   /*   this.filteredOptions = this.formRequest.get("vigile")!.valueChanges
+    
+     this.filteredOptions = this.formRequest.get("vigile")!.valueChanges
      .pipe(
         distinctUntilChanged(),
         switchMap(val => {
-          return val && val.length >=3? this.filter(val || '') : ''
+          return val && val.length >=3? this.filter(val || '') : '' 
      }) 
-      ); */    
+      );    
   }
-  
-   
-  filter(val: string)/* : Observable<any> */ {
-
-    /* return */ this.vvfapiService.getUtentiByName("demata").subscribe(x => console.log(x))
-     /* .pipe(
-       map(response => response.map(x => x.codiceFiscale))
-     ) */
+     
+  filter(val: string | Personale): Observable<any> | any {
+    if(typeof val === "string"){
+      return this.vvfapiService.getUtentiByName(val)
+      .pipe(
+        map(response => response.map(x => x))
+        )
+      }
+      else {
+        return val
+      }
    }  
 
   onSubmit(){
