@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "https://wauc.dipvvf.it",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

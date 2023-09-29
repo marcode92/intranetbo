@@ -1,4 +1,18 @@
+<div>
 <form class="presence-form" [formGroup]="formRequest" (ngSubmit)="onSubmit()">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of filteredOptions | async" >
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
+  <mat-form-field >
+  <input matInput type="text"
+       placeholder="Pick one"
+       aria-label="Number"
+       matInput
+       formControlName="vigile"
+       [matAutocomplete]="auto">
+      </mat-form-field>
   <mat-form-field >
     <mat-label>Choose a date</mat-label>
     <input matInput formControlName="day" [matDatepicker]="picker">
@@ -16,3 +30,4 @@
   </mat-form-field>
   <button type="submit" [disabled]="!formRequest.valid">Submit</button>
   </form>
+</div>
