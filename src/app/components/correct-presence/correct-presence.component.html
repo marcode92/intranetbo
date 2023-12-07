@@ -1,8 +1,8 @@
 <div>
 <form class="presence-form" [formGroup]="formRequest" (ngSubmit)="onSubmit()">
   <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let option of filteredOptions | async" >
-      {{option}}
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option.nome+' '+option.cognome" >
+      {{option.codiceFiscale}}
     </mat-option>
   </mat-autocomplete>
   <mat-form-field >
