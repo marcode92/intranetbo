@@ -48,6 +48,7 @@ import { CorrectPresenceComponent } from './components/correct-presence/correct-
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,8 @@ import {MatSelectModule} from '@angular/material/select';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatSelectModule,
+    CommonModule, 
     BrowserAnimationsModule,
     MatGridListModule,
     MatTabsModule,

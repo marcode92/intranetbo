@@ -40,3 +40,9 @@ export interface Personale {
         descrizione: string
     }
 }
+
+export enum MESSAGE {
+    error_credential = 'CRED_ERR',
+    not_registered = 'NOT_REG',
+    ok_login = 'OK_LOG'
+  }
