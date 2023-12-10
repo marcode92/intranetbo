@@ -3,6 +3,12 @@ export interface Approver {
     cognome: string;
 }
 
+export interface LoginParam {
+    idUser?:string,
+    areaApp?:string,
+    userLogged:boolean,
+}
+  
 export interface Personale {
     codiceFiscale: string,
     cognome: string,

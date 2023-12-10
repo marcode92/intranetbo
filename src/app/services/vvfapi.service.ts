@@ -1,7 +1,7 @@
-import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Personale } from '../model/correctPresence';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { LoginParam, Personale } from '../model/intranetModel';
 
 const url = "/api"
 
@@ -17,7 +17,13 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class VvfapiService {
-
+  loginState : boolean = false;
+  loginServiceDone: LoginParam = {
+    userLogged:false
+   }; 
+   
+  datiSubject = new BehaviorSubject<any>(this.loginServiceDone)
+  loginServiceDone$ = this.datiSubject.asObservable()
   constructor(private http: HttpClient) { }
 
   getUtentiByName(searchKey: string):Observable<Personale[]> {

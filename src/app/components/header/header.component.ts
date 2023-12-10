@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { LoginParam } from 'src/app/model/intranetModel';
+import { VvfapiService } from 'src/app/services/vvfapi.service';
 
 
 export interface Tile {
@@ -27,12 +30,27 @@ export interface Link {
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit{
+  private subscription: Subscription;
 
+  loginParam: LoginParam = {
+    userLogged : false
+  };
+  
   constructor( private route: ActivatedRoute,
-    private router: Router) {};
+    private router: Router, public readonly vvfApiService: VvfapiService) {
+      /* this.loginParam = loginService.loginServiceDone; */
+    };
 
   ngOnInit(): void {
+    this.subscription = this.vvfApiService.datiSubject.subscribe(x => {
 
+      this.loginParam.userLogged = x.userLogged
+      this.loginParam.idUser = x.idUser;
+    })
+  }
+
+  changeButton(){
+    console.log("change")
   }
 
   //Header grid subdivision

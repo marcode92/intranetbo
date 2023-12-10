@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs';
-import { Approver, Personale } from 'src/app/model/correctPresence';
+import { Approver, Personale } from 'src/app/model/intranetModel';
 import { VvfapiService } from 'src/app/services/vvfapi.service';
 
 @Component({

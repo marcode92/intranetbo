@@ -22,9 +22,16 @@
           <i> com.salaop.bologna@cert.vigilfuoco.it</i><br>
         </div> -->
         <div *ngSwitchCase="3">
+          <div *ngIf="!loginParam.userLogged;else loginDone">
           <button (click)="login()">
             Accedi
           </button>
+        </div>
+        <ng-template #loginDone>
+          <div>
+            {{ loginParam.idUser }}
+          </div>
+        </ng-template>
         </div>
         <div *ngSwitchCase="4">
           <section>
