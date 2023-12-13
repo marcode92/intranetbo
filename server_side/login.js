@@ -41,8 +41,8 @@ app.post('/login', (req, res) => {
             let nameDisplayed = "";
             login_res =
                 client.search("OU=Sede,dc=bo,dc=dipvvf,dc=it", { filter: `(&(objectCategory=user)(userPrincipalName=${usernameLogin}))`, scope: "sub" },
-                    (_,x) => {
-                      x.on('searchEntry', (entry) => {
+                    (_, x) => {
+                        x.on('searchEntry', (entry) => {
                             const entireOBJ = entry.attributes
 
                             entireOBJ.forEach(attribute => {
@@ -52,41 +52,55 @@ app.post('/login', (req, res) => {
                                     nameDisplayed = attribute.values
                                 }
                             });
+                            console.log("search credential ok")
+                            res.emit('end')
                         })
                         x.on('end', () => {
-                            console.log("namedisplayed", nameDisplayed);
+                            if (req.body && req.body.userArea) {
+                                console.log("qui insert", nameDisplayed,req.body.userArea)
+                                var op = `INSERT INTO iusers(users,area)VALUES('${nameDisplayed}','${req.body.userArea}')`
+                                sql.open(config, (err, conn) => {
+                                    if (err) {
+                                        console.error(err.message);
+                                        return;
+                                    }
+
+                                    conn.query(op, (err, rows) => {
+                                        if (err) {
+                                            console.error(err.message);
+                                            return;
+                                        }
+                                        res.json('OK_LOG')                                      
+                                        conn.close();
+                                    });
+                                })
+                            } else {
+                                var op = `SELECT users from iusers where users='${nameDisplayed}'`
+                                sql.open(config, (err, conn) => {
+                                    if (err) {
+                                        console.error(err.message);
+                                        return;
+                                    }
+
+                                    conn.query(op, (err, rows) => {
+                                        if (err) {
+                                            console.error(err.message);
+                                            return;
+                                        }
+                                        if (!rows.length) {
+                                            res.json('NOT_REG')
+                                        } else {res.json('OK_LOG')}
+                                        conn.close();
+                                    });
+                                })
+                            }
                         });
+
                     }
                 );
         }
-
-
-        if (login_res === '') {
-            console.log("credenziali errate")
-        } else {
-            const query = "SELECT users from iusers where users=`${req.body.username}`"
-            sql.open(config, (err, conn) => {
-                if (err) {
-                    console.error(err.message);
-                    return;
-                }
-
-                conn.query(query, (err, rows) => {
-                    if (err) {
-                        console.error(err.message);
-                        return;
-                    }
-
-                    console.log(rows);
-                    res.json(rows);
-                    conn.close();
-                });
-            })
-        }
-        /*`INSERT INTO dbo.iusers(users,area)VALUES('luca','TEP')`*/
-
     });
-  });
+});
 
 app.post('/sendemail', (req, res) => {
     async function main() {
@@ -115,7 +129,7 @@ app.post('/sendemail', (req, res) => {
     main().catch(console.error);
 })
 
-function logCallback(err, res) {
+/* function logCallback(err, res) {
     if (!res) {
         console.log(err)
         return
@@ -144,7 +158,7 @@ function logCallback(err, res) {
     res.on('end', (result) => {
         console.log('status: ' + result?.status);
     });
-}
+} */
 
 app.listen(3000, function () {
     console.log("server started");

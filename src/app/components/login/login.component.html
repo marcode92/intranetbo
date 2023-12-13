@@ -14,11 +14,11 @@
     </mat-form-field>
     <mat-form-field *ngIf="this.responseLogin === this.not_registered.toString()">
       <mat-label>AREA DI APPARTENENZA</mat-label>
-      <mat-select formControlName="area">
+      <mat-select formControlName="userArea">
         <mat-option *ngFor="let area of areeAppart" [value]="area">{{ area }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <button (click) ="submit()">submit</button>
+    <button (click) ="submit(responseLogin)">submit</button>
   </form>
 <!-- <div *ngIf="loginCorrect"> -->
  <!-- <h1>LOGIN EFFETTUATO</h1>

@@ -48,8 +48,8 @@ export class VvfapiService {
     return this.http.get(url + requestUrl)
   }
 
-  loginUser(username: string, password: string) {
-    return this.http.request('POST',`http://localhost:3000/login`, {body:{username, password}} )
+  loginUser(username: string, password: string, userArea?: string) {
+    return this.http.request('POST',`http://localhost:3000/login`, {body:{username, password, userArea}} )
   }
 
   sendemail() {
