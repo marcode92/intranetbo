@@ -38,14 +38,13 @@ export class HeaderComponent implements OnInit{
   
   constructor( private route: ActivatedRoute,
     private router: Router, public readonly vvfApiService: VvfapiService) {
-      /* this.loginParam = loginService.loginServiceDone; */
     };
 
   ngOnInit(): void {
     this.subscription = this.vvfApiService.datiSubject.subscribe(x => {
 
       this.loginParam.userLogged = x.userLogged
-      this.loginParam.idUser = x.idUser;
+      this.loginParam.userID = x.userID;
     })
   }
 

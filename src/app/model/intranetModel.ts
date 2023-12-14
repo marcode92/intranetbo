@@ -4,8 +4,8 @@ export interface Approver {
 }
 
 export interface LoginParam {
-    idUser?:string,
-    areaApp?:string,
+    userID?:string,
+    areaComp?:string,
     userLogged:boolean,
 }
   

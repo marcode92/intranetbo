@@ -27,40 +27,41 @@ export class LoginComponent {
     private route: ActivatedRoute, private router: Router) { };
 
 
-  submit(responseLogin: string) {
-    if (responseLogin === this.not_registered.toString()) {
+  submit() {
+        this.vvfapiService.loginUser(this.form.controls.username.value!, this.form.controls.password.value!).subscribe((res: any) => {
+        this.responseLogin = res.logState;
+
+        if (!JSON.parse(this.responseLogin) && this.responseLogin!==null) {
+          this.form.controls.username.disable();
+          this.form.controls.password.disable();
+        } else if (this.responseLogin!==null) {
+          this.loginDone = {
+            userID: res.userID,
+            areaComp: res.areaComp,
+            userLogged: true,
+          }
+          this.vvfapiService.datiSubject.next(this.loginDone)
+          this.router.navigate([''], { relativeTo: this.route });
+        }
+      })
+    }
+  
+  register(){
+    if (!JSON.parse(this.responseLogin) && this.responseLogin!==null) {
 
       this.vvfapiService.loginUser(
         this.form.controls.username.value!, this.form.controls.password.value!,
         this.form.controls.userArea.value!).subscribe((res: any) => {
 
           this.loginDone = {
-            idUser: res.idUser,
-            areaApp: res.areaApp,
+            userID: res.userID,
+            areaComp: res.area,
             userLogged: true,
           }
           this.vvfapiService.datiSubject.next(this.loginDone)
-          this.router.navigate(['',/* res.idUser */], { relativeTo: this.route });
+          this.router.navigate([''], { relativeTo: this.route });
 
         })
-    } else {
-      this.vvfapiService.loginUser(this.form.controls.username.value!, this.form.controls.password.value!).subscribe((res: any) => {
-        this.responseLogin = res.toString();
-        if (this.responseLogin === this.not_registered.toString()) {
-          this.form.controls.username.disable();
-          this.form.controls.password.disable();
-        } else if (this.responseLogin === this.login_ok.toString()) {
-          this.vvfapiService.loginState = true;
-          this.loginDone = {
-            idUser: res.idUser,
-            areaApp: res.areaApp,
-            userLogged: true,
-          }
-          this.vvfapiService.datiSubject.next(this.loginDone)
-          this.router.navigate(['',/* res.idUser */], { relativeTo: this.route });
-        }
-      })
-    }
   }
 }
-
+}

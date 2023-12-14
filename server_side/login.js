@@ -31,12 +31,12 @@ app.post('/login', (req, res) => {
         url: 'ldap://bo.dipvvf.it:3268'
     });
 
-    const usernameLogin = `${req.body.username}@bo.dipvvf.it`
+    const usernameLogin = `${req.body.userID}@bo.dipvvf.it`
 
     client.bind(usernameLogin, req.body.password, (err) => {
         if (err) {
             console.log('ERROR new connection' + err);
-            res.json("CRED_ERR")
+            res.json({logState:null})
         } else {
             let nameDisplayed = "";
             login_res =
@@ -46,8 +46,6 @@ app.post('/login', (req, res) => {
                             const entireOBJ = entry.attributes
 
                             entireOBJ.forEach(attribute => {
-                                console.log(`${attribute.type}: ${attribute.values.join(', ')}`);
-
                                 if (attribute.type === "displayName") {
                                     nameDisplayed = attribute.values
                                 }
@@ -56,26 +54,21 @@ app.post('/login', (req, res) => {
                             res.emit('end')
                         })
                         x.on('end', () => {
-                            if (req.body && req.body.userArea) {
-                                console.log("qui insert", nameDisplayed,req.body.userArea)
-                                var op = `INSERT INTO iusers(users,area)VALUES('${nameDisplayed}','${req.body.userArea}')`
+                            if (req.body && req.body.areaComp) {
+                                var op = `INSERT INTO intranet_user(userID,areaComp)VALUES('${nameDisplayed}','${req.body.areaComp}')`
                                 sql.open(config, (err, conn) => {
-                                    if (err) {
-                                        console.error(err.message);
-                                        return;
-                                    }
+                                    if (err) { return; }
 
                                     conn.query(op, (err, rows) => {
                                         if (err) {
-                                            console.error(err.message);
                                             return;
                                         }
-                                        res.json('OK_LOG')                                      
+                                        res.json({logState:"true",userID:rows[0].userID,areaComp:rows[0].areaComp})                                      
                                         conn.close();
                                     });
                                 })
                             } else {
-                                var op = `SELECT users from iusers where users='${nameDisplayed}'`
+                                var op = `SELECT userID,areaComp from intranet_user where userID='${nameDisplayed}'`
                                 sql.open(config, (err, conn) => {
                                     if (err) {
                                         console.error(err.message);
@@ -84,12 +77,12 @@ app.post('/login', (req, res) => {
 
                                     conn.query(op, (err, rows) => {
                                         if (err) {
-                                            console.error(err.message);
                                             return;
                                         }
                                         if (!rows.length) {
-                                            res.json('NOT_REG')
-                                        } else {res.json('OK_LOG')}
+                                            res.json({logState:"false"})
+                                        } else {
+                                            res.json({logState:"true",userID:rows[0].userID,areaComp:rows[0].areaComp})}
                                         conn.close();
                                     });
                                 })

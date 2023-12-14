@@ -17,7 +17,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class VvfapiService {
-  loginState : boolean = false;
   loginServiceDone: LoginParam = {
     userLogged:false
    }; 
@@ -48,8 +47,8 @@ export class VvfapiService {
     return this.http.get(url + requestUrl)
   }
 
-  loginUser(username: string, password: string, userArea?: string) {
-    return this.http.request('POST',`http://localhost:3000/login`, {body:{username, password, userArea}} )
+  loginUser(userID: string, password: string, areaComp?: string) {
+    return this.http.request('POST',`http://localhost:3000/login`, {body:{userID, password, areaComp}} )
   }
 
   sendemail() {
