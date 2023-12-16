@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { LoginParam } from 'src/app/model/intranetModel';
+import { userPayload } from 'src/app/model/intranetModel';
 import { VvfapiService } from 'src/app/services/vvfapi.service';
 
 
@@ -32,8 +32,8 @@ export interface Link {
 export class HeaderComponent implements OnInit{
   private subscription: Subscription;
 
-  loginParam: LoginParam = {
-    userLogged : false
+  userPayload: userPayload = {
+    logState : false
   };
   
   constructor( private route: ActivatedRoute,
@@ -41,10 +41,10 @@ export class HeaderComponent implements OnInit{
     };
 
   ngOnInit(): void {
-    this.subscription = this.vvfApiService.datiSubject.subscribe(x => {
+    this.subscription = this.vvfApiService.datiSubject.subscribe(user => {
 
-      this.loginParam.userLogged = x.userLogged
-      this.loginParam.userID = x.userID;
+      this.userPayload.logState = user.logState
+      this.userPayload.userID = user.userID;
     })
   }
 

@@ -3,10 +3,10 @@ export interface Approver {
     cognome: string;
 }
 
-export interface LoginParam {
+export interface userPayload {
     userID?:string,
     areaComp?:string,
-    userLogged:boolean,
+    logState?:boolean,
 }
   
 export interface Personale {

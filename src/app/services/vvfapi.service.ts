@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { LoginParam, Personale } from '../model/intranetModel';
+import { userPayload, Personale } from '../model/intranetModel';
 
 const url = "/api"
 
@@ -17,8 +17,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class VvfapiService {
-  loginServiceDone: LoginParam = {
-    userLogged:false
+  loginServiceDone: userPayload = {
+    logState:false
    }; 
    
   datiSubject = new BehaviorSubject<any>(this.loginServiceDone)

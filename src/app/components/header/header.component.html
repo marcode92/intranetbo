@@ -22,14 +22,14 @@
           <i> com.salaop.bologna@cert.vigilfuoco.it</i><br>
         </div> -->
         <div *ngSwitchCase="3">
-          <div *ngIf="!loginParam.userLogged;else loginDone">
+          <div *ngIf="!userPayload.logState;else loginDone">
           <button (click)="login()">
             Accedi
           </button>
         </div>
         <ng-template #loginDone>
           <div>
-            {{ loginParam.userID }}
+            {{ userPayload.userID }}
           </div>
         </ng-template>
         </div>

@@ -1,17 +1,20 @@
 <form class="example-form" [formGroup]="form">
-  <mat-label *ngIf="responseLogin === null">
+  <mat-label *ngIf="verifyLogin()">
     Le credenziali inserite non risultano corrette. Riprova.</mat-label>
-  <mat-label *ngIf="this.responseLogin === 'false'">
-    Utente non registrato, inserisci area di appartenenza</mat-label>
-  <mat-form-field class="example-full-width">
-    <mat-label>Username</mat-label>
-    <input matInput value="Username" formControlName="username">
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <mat-label>Password</mat-label>
-    <input type="password" matInput formControlName="password">
-  </mat-form-field>
-  <div *ngIf="this.responseLogin === 'false'">
+
+    <mat-label *ngIf="verifyRegistr()"> Utente non registrato, inserisci area di appartenenza</mat-label>
+      <mat-form-field class="example-full-width">
+        <mat-label>Username</mat-label>
+        <input matInput value="Username" formControlName="username">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password">
+      </mat-form-field>
+    <div *ngIf="!userPayload || verifyLogin() ; else template_reg">      
+      <button (click)="submit()">LOGIN</button>
+    </div>
+  <ng-template #template_reg>    
     <mat-form-field>
       <mat-label>AREA DI APPARTENENZA</mat-label>
       <mat-select formControlName="userArea">
@@ -19,12 +22,5 @@
       </mat-select>
     </mat-form-field>
     <button (click)="register()">REGISTRA UTENTE</button>
-  </div>
-  <div *ngIf="this.responseLogin !== 'false'">
-    <button (click)="submit()">LOGIN</button>
-  </div>
+</ng-template>
 </form>
-<!-- <div *ngIf="loginCorrect"> -->
-<!-- <h1>LOGIN EFFETTUATO</h1>
- <h3>UTENTE {{user.nome}} {{user.cognome}}</h3> -->
-<!--   </div> -->
