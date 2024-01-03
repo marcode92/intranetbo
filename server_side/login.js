@@ -1,17 +1,20 @@
 var express = require('express');
+var jwt = require('jsonwebtoken')
 var sql = require('msnodesqlv8');
-/* var err_mess = require('ERR_MESS')*/
-var config = "Server=VMINTRANET\\SQLEXPRESS2008;Database=newintranet;Trusted_Connection=No;UID=sa;PWD=Pippo123.;Driver={ODBC Driver 11 for SQL Server}"
-
 var app = express();
 
+var config = "Server=VMINTRANET\\SQLEXPRESS2008;Database=newintranet;Trusted_Connection=No;UID=sa;PWD=Pippo123.;Driver={ODBC Driver 11 for SQL Server}"
+const secretKey = "test_secret"
+const options = {
+    expiresIn: '1h', // Tempo di validità del token (ad esempio, 1 ora)
+};
 var ldap = require('ldapjs');
 var axios = require('axios')
 var bodyParser = require('body-parser')
 var index = 0
-
+/* 
 const nodemailer = require("nodemailer");
-const html = `<div>hello </div>`;
+const html = `<div>hello </div>`; */
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -36,7 +39,12 @@ app.post('/login', (req, res) => {
     client.bind(usernameLogin, req.body.password, (err) => {
         if (err) {
             console.log('ERROR new connection' + err);
-            res.json({logState:null})
+            const payload = {
+                userID: '',
+                userRole: '',
+            }
+            res.json(jwt.sign(payload, secretKey, options))
+
         } else {
             let nameDisplayed = "";
             login_res =
@@ -50,43 +58,31 @@ app.post('/login', (req, res) => {
                                     nameDisplayed = attribute.values
                                 }
                             });
-                            console.log("search credential ok")
                             res.emit('end')
                         })
                         x.on('end', () => {
-                            if (req.body && req.body.areaComp) {
-                                var op = `INSERT INTO intranet_user(userID,areaComp)VALUES('${nameDisplayed}','${req.body.areaComp}')`
-                                sql.open(config, (err, conn) => {
-                                    if (err) { return; }
 
-                                    conn.query(op, (err, rows) => {
-                                        if (err) {
-                                            return;
-                                        }
-                                        res.json({logState:"true",userID:rows[0].userID,areaComp:rows[0].areaComp})                                      
-                                        conn.close();
-                                    });
-                                })
-                            } else {
-                                var op = `SELECT userID,areaComp from intranet_user where userID='${nameDisplayed}'`
-                                sql.open(config, (err, conn) => {
+                            var op = `SELECT userID,userRole from login where userID='${nameDisplayed}'`
+                            sql.open(config, (err, conn) => {
+                                if (err) {
+                                    return;
+                                }
+
+                                conn.query(op, (err, rows) => {
                                     if (err) {
-                                        console.error(err.message);
+                                        console.error("error", err.message);
                                         return;
                                     }
-
-                                    conn.query(op, (err, rows) => {
-                                        if (err) {
-                                            return;
-                                        }
-                                        if (!rows.length) {
-                                            res.json({logState:"false"})
-                                        } else {
-                                            res.json({logState:"true",userID:rows[0].userID,areaComp:rows[0].areaComp})}
-                                        conn.close();
-                                    });
-                                })
-                            }
+                                    const payload = {
+                                        //namedisplayed qui serve quando torni senza role a distinguerlo da login fallito campi vuoti
+                                        userID: nameDisplayed,
+                                        userRole: rows.length ? rows[0].userRole : '',
+                                    }
+                                    res.json(jwt.sign(payload, secretKey, options))
+                                    conn.close();
+                                });
+                                console.log("select ")
+                            })
                         });
 
                     }
@@ -95,7 +91,41 @@ app.post('/login', (req, res) => {
     });
 });
 
-app.post('/sendemail', (req, res) => {
+app.post('/register', (req, res) => {
+    var op = `INSERT INTO login(userID,userRole)VALUES('${req.body.userID}','${req.body.userRole}')`
+    sql.open(config, (err, conn) => {
+        if (err) {
+            console.error(err.message);
+            return;
+        }
+
+        conn.query(op, (err, rows) => {
+            if (err) {
+                return;
+            }
+            const payload = {
+                userID: req.body.userID,
+                userRole: req.body.userRole,
+            }
+            res.json(jwt.sign(payload, secretKey, options))
+            conn.close();
+        });
+    })
+})
+/* FUTURE DEVELOPING
+app.post('/verifyToken', (token,res) =>{
+    jwt.verify(token, secretKey, (err, decoded) => {
+        if (err) {
+          // Il token è invalido o scaduto
+          console.error('Errore nella verifica del token:', err);
+        } else {
+          // Il token è valido, puoi accedere ai dati decodificati
+          console.log('Token verificato, dati decodificati:', decoded);
+        }
+      });
+}) */
+
+/* app.post('/sendemail', (req, res) => {
     async function main() {
 
         const transporter = nodemailer.createTransport({
@@ -120,7 +150,7 @@ app.post('/sendemail', (req, res) => {
     }
 
     main().catch(console.error);
-})
+}) */
 
 /* function logCallback(err, res) {
     if (!res) {

@@ -22,7 +22,7 @@
           <i> com.salaop.bologna@cert.vigilfuoco.it</i><br>
         </div> -->
         <div *ngSwitchCase="3">
-          <div *ngIf="!userPayload.logState;else loginDone">
+          <div *ngIf="!userPayload.userRole || !userPayload.userID;else loginDone">
           <button (click)="login()">
             Accedi
           </button>
@@ -30,6 +30,14 @@
         <ng-template #loginDone>
           <div>
             {{ userPayload.userID }}
+          </div>
+          <div class = "position">           
+            <button class="button-without-style" >
+              DISCONNETTI
+            </button>
+            <div class="icon" (click)="disconnect()">
+              <i class="material-icons">toggle_on</i>
+            </div>
           </div>
         </ng-template>
         </div>

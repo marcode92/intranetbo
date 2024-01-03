@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { userPayload } from 'src/app/model/intranetModel';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { VvfapiService } from 'src/app/services/vvfapi.service';
 
 
@@ -29,27 +30,40 @@ export interface Link {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnDestroy, AfterViewInit{
   private subscription: Subscription;
 
   userPayload: userPayload = {
-    logState : false
+    userID : '',
+    userRole: ''
   };
   
   constructor( private route: ActivatedRoute,
-    private router: Router, public readonly vvfApiService: VvfapiService) {
+    private router: Router, public readonly vvfApiService: VvfapiService,
+    private authService: AuthenticationService) {
     };
 
-  ngOnInit(): void {
-    this.subscription = this.vvfApiService.datiSubject.subscribe(user => {
+    ngAfterViewInit (): void {
+    this.subscription = this.vvfApiService.logObs$.subscribe(() => {
+      const token = this.authService.getToken();
+      if(token){
+        const user = JSON.parse(atob(token.split('.')[1]));
+        this.userPayload ={
+          userID: user.userID,
+          userRole: user.userRole
+        } 
 
-      this.userPayload.logState = user.logState
-      this.userPayload.userID = user.userID;
+      }
     })
   }
 
-  changeButton(){
-    console.log("change")
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  disconnect(){
+    this.authService.setToken('')
+    this.vvfApiService.datiSubject.next()
   }
 
   //Header grid subdivision

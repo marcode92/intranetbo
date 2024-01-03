@@ -9,8 +9,10 @@ export class AuthenticationService {
   constructor(private http: HttpClient) {}
 
   getToken(): string | null {
-    return localStorage.getItem('token')
+    return sessionStorage.getItem('token')
   }
 
-  
+  setToken(token: string) {
+    sessionStorage.setItem('token', token)
+  }
 }

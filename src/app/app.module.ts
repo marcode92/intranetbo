@@ -49,6 +49,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 import { CommonModule } from '@angular/common';
+import { VvfapiService } from './services/vvfapi.service';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,7 @@ import { CommonModule } from '@angular/common';
     MatDividerModule,
     MatCheckboxModule
   ],
-  providers: [MongodbService],
+  providers: [MongodbService, VvfapiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

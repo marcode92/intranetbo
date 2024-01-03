@@ -5,8 +5,7 @@ export interface Approver {
 
 export interface userPayload {
     userID?:string,
-    areaComp?:string,
-    logState?:boolean,
+    userRole?:string,
 }
   
 export interface Personale {

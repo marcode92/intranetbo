@@ -2,7 +2,7 @@
   <mat-label *ngIf="verifyLogin()">
     Le credenziali inserite non risultano corrette. Riprova.</mat-label>
 
-    <mat-label *ngIf="verifyRegistr()"> Utente non registrato, inserisci area di appartenenza</mat-label>
+    <mat-label *ngIf="verifyEnable()"> Utente non registrato, inserisci area di appartenenza</mat-label>
       <mat-form-field class="example-full-width">
         <mat-label>Username</mat-label>
         <input matInput value="Username" formControlName="username">

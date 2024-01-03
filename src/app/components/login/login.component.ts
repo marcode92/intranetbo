@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { VvfapiService } from 'src/app/services/vvfapi.service';
 import { userPayload, MESSAGE } from 'src/app/model/intranetModel';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -24,57 +25,47 @@ export class LoginComponent {
   });
 
   constructor(private readonly vvfapiService: VvfapiService,
+    private authService: AuthenticationService,
     private route: ActivatedRoute, private router: Router) { };
 
   submit() {
         this.vvfapiService.loginUser(this.form.controls.username.value!, this.form.controls.password.value!).subscribe((token: any) => {
-        localStorage.setItem('token', token);
-        this.userPayload = JSON.parse(atob(token.split('.')[1]));
+          const user = JSON.parse(atob(token.split('.')[1]));
+          this.userPayload = {
+            userID: user && user.userID || '',
+            userRole: user && user.userRole || ''
+          }
 
        if(this.verifyLogin()){
         return;
        }
 
-        if (this.verifyRegistr()) {
+        if (this.verifyEnable()) {
           this.form.controls.username.disable();
           this.form.controls.password.disable();
         } else {
-          this.loginDone = {
-            userID: this.userPayload.userID,
-            areaComp: this.userPayload.areaComp,
-            logState: this.userPayload.logState,
-          }
-          this.vvfapiService.datiSubject.next(this.loginDone)
+          this.authService.setToken(token);
+          this.vvfapiService.triggerUpdate()
           this.router.navigate([''], { relativeTo: this.route });
         }      
       })
     }
   
     verifyLogin(){
-      return this.userPayload && !this.userPayload.logState
+      return this.userPayload && !this.userPayload.userID
     }
 
-    verifyRegistr(){
-      return (this.userPayload && this.userPayload.logState && !this.userPayload.userID && !this.userPayload.areaComp);
+    verifyEnable(){
+      return (this.userPayload && this.userPayload.userID && !this.userPayload.userRole);
     }
-/*fase 0 userpayload vuoto, schermata normale
-  scenario 1: credenziali sbagliate userpayload ok logstate false campi vuoti
-  scenario 2: credenziali corrette utente non registrato 
-              userpayload ok logstate true campi vuoti
-  scenario 3: credenziali corrette utente registrato
-              userpayload ok logstate true campi pieni
-*/
+
   register(){
-      this.vvfapiService.loginUser(
-        this.form.controls.username.value!, this.form.controls.password.value!,
-        this.form.controls.userArea.value!).subscribe((res: any) => {
-
-          this.loginDone = {
-            userID: this.userPayload.userID,
-            areaComp: this.userPayload.areaComp,
-            logState: true,
-          }
-          this.vvfapiService.datiSubject.next(this.loginDone)
+      if(this.userPayload && this.userPayload.userID)
+      this.vvfapiService.registerUser(
+        this.userPayload.userID, this.form.controls.password.value!,
+        this.form.controls.userArea.value!).subscribe((token: any) => {
+          this.authService.setToken(token);         
+          this.vvfapiService.triggerUpdate()
           this.router.navigate([''], { relativeTo: this.route });
 
         })
