@@ -27,13 +27,13 @@
     </mat-drawer>
     
     <!-- Page content -->
-    <mat-drawer-content>
+    <mat-drawer-content >
       <div class="content-text {{class}}"> {{text}} </div>
       <br>
       <br>
-  
+      <div *ngIf="openMenu">  
       <generic-office></generic-office>
-  
+    </div>
     </mat-drawer-content>
   
   </mat-drawer-container>

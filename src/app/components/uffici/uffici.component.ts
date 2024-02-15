@@ -43,12 +43,14 @@ export class UfficiComponent {
     this.token = authService.getToken();
    } */
 
-   title = "Settori Operativi"
+  title = "UFFICI AMMINISTRATIVI"
   text = "Selezionare nel menù laterale il contenuto che si desidera visualizzare";
   class = ""
   content = ""
+  openMenu : boolean = false;
 
   onClick(node: FlatNode) {
+    this.openMenu = true;
     this.text = node.name;
     this.class = "content-text-title"
     this.content = "<app-odg></app-odg>"
