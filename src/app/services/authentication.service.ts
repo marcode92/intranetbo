@@ -8,8 +8,8 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
 
-  getToken(): string | null {
-    return sessionStorage.getItem('token')
+  getToken(): string  {
+    return sessionStorage.getItem('token')!
   }
 
   setToken(token: string) {

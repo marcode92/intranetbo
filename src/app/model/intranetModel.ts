@@ -46,8 +46,7 @@ export interface Personale {
     }
 }
 
-export enum MESSAGE {
-    error_credential = 'CRED_ERR',
-    not_registered = 'NOT_REG',
-    ok_login = 'OK_LOG'
-  }
+export interface officeTable {
+    
+}
+

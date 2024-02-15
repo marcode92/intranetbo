@@ -50,6 +50,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { VvfapiService } from './services/vvfapi.service';
+import { GenericOfficeComponent } from './components/uffici/generic-office/generic-office.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,8 @@ import { VvfapiService } from './services/vvfapi.service';
     ModelliDocumentiComponent,
     LifmComponent,
     LoginComponent,
-    CorrectPresenceComponent
+    CorrectPresenceComponent,
+    GenericOfficeComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +90,7 @@ import { VvfapiService } from './services/vvfapi.service';
     CommonModule, 
     BrowserAnimationsModule,
     MatGridListModule,
+    MatTableModule,
     MatTabsModule,
     MatButtonModule,
     MatRippleModule,
@@ -107,7 +111,7 @@ import { VvfapiService } from './services/vvfapi.service';
     MatDividerModule,
     MatCheckboxModule
   ],
-  providers: [MongodbService, VvfapiService],
+  providers: [MongodbService, VvfapiService, UfficiComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

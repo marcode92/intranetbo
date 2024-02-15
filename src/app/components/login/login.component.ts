@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { VvfapiService } from 'src/app/services/vvfapi.service';
-import { userPayload, MESSAGE } from 'src/app/model/intranetModel';
+import { userPayload } from 'src/app/model/intranetModel';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -14,9 +14,7 @@ export class LoginComponent {
   token: ''
   userPayload : userPayload;
   loginDone: userPayload;
-  error_credential: MESSAGE = MESSAGE.error_credential;
-  not_registered: MESSAGE = MESSAGE.not_registered;
-  login_ok: MESSAGE = MESSAGE.ok_login;
+
   areeAppart: string[] = ['VIGILANZA', 'FORMAZIONE']
   form = new FormGroup({
     username: new FormControl('', Validators.minLength(1)),

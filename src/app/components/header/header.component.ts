@@ -52,7 +52,11 @@ export class HeaderComponent implements OnDestroy, AfterViewInit{
           userID: user.userID,
           userRole: user.userRole
         } 
-
+      } else {
+        this.userPayload ={
+          userID: '',
+          userRole: ''
+        } 
       }
     })
   }
@@ -64,6 +68,7 @@ export class HeaderComponent implements OnDestroy, AfterViewInit{
   disconnect(){
     this.authService.setToken('')
     this.vvfApiService.datiSubject.next()
+    this.router.navigate([''], { relativeTo: this.route });
   }
 
   //Header grid subdivision

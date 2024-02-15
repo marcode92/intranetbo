@@ -23,10 +23,8 @@ export class VvfapiService {
   constructor(private http: HttpClient) { }
 
   getUtentiByName(searchKey: string):Observable<Personale[]> {
-   
- 
-    return this.http.get<Personale[]>(`${url}/Personale?searchKey=${searchKey}`, httpOptions)
     
+    return this.http.get<Personale[]>(`${url}/Personale?searchKey=${searchKey}`, httpOptions)
   }
 
   getUtentiBySede(codice: string) {

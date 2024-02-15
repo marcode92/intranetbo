@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .element {
+    margin: 5px;
+    padding: 10px;
+  }

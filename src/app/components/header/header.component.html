@@ -32,12 +32,12 @@
             {{ userPayload.userID }}
           </div>
           <div class = "position">           
-            <button class="button-without-style" >
+            <button class="button-without-style" (click)="disconnect()">
               DISCONNETTI
             </button>
-            <div class="icon" (click)="disconnect()">
+            <button class="icon button-without-style" (click)="disconnect()">
               <i class="material-icons">toggle_on</i>
-            </div>
+            </button>
           </div>
         </ng-template>
         </div>
