@@ -59,4 +59,9 @@ export class VvfapiService {
     this.datiSubject.next();
     })
   }
+
+  upload(nome: string, descrizione: string, file: any){
+    return this.http.request('POST',`http://localhost:3000/upload`, 
+    {body:{date: new Date(), nome, descrizione, file}} )
+  }
 }

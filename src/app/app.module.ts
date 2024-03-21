@@ -53,6 +53,8 @@ import { VvfapiService } from './services/vvfapi.service';
 import { GenericOfficeComponent } from './components/uffici/generic-office/generic-office.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule} from '@angular/material/card';
+import {MatDialogModule} from '@angular/material/dialog';
+import { UploadModuleDialogComponent } from './components/uffici/generic-office/upload-module-dialog/upload-module-dialog.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,8 @@ import { MatCardModule} from '@angular/material/card';
     LifmComponent,
     LoginComponent,
     CorrectPresenceComponent,
-    GenericOfficeComponent
+    GenericOfficeComponent,
+    UploadModuleDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -95,6 +98,7 @@ import { MatCardModule} from '@angular/material/card';
     MatTabsModule,
     MatButtonModule,
     MatRippleModule,
+    MatDialogModule,
     MatIconModule,
     MatListModule,
     MatPaginatorModule,

@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>CARICA UN NUOVO MODULO</h2>
+<mat-dialog-content>
+    <form [formGroup]="uploadForm" class="orient-fields">
+            <mat-form-field>
+              <mat-label>Nome modulo</mat-label>
+              <input matInput formControlName="name">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Descrizione</mat-label>
+              <textarea matInput rows="4" placeholder="Inserisci il testo..." formControlName="description"></textarea>
+            </mat-form-field>
+            <input type="file" (change)="onFileSelected($event)">
+
+      </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancella</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click) = "upload()">Carica</button>
+</mat-dialog-actions>
