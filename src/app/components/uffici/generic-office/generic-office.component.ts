@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { officeTable } from 'src/app/model/intranetModel';
 
 const ELEMENT_DATA: officeTable[] = [
@@ -16,7 +17,10 @@ export class GenericOfficeComponent {
     contatti: string = '';
     referenti: string = '';
 
-    displayedColumns: string[] = ['data', 'nome', 'descrizione', 'allegato'];
+      search = new FormControl('', Validators.minLength(1));
+
+    
+    displayedColumns: string[] = ['data', 'nome', 'descrizione', 'allegato','delete'];
     dataSource = ELEMENT_DATA;
   
 }

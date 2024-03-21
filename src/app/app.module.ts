@@ -52,6 +52,7 @@ import { CommonModule } from '@angular/common';
 import { VvfapiService } from './services/vvfapi.service';
 import { GenericOfficeComponent } from './components/uffici/generic-office/generic-office.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { MatTableModule } from '@angular/material/table';
     MatSidenavModule,
     MatTreeModule,
     MatInputModule,
+    MatCardModule,
     MatDatepickerModule, 
     MatNativeDateModule,
     HttpClientModule,

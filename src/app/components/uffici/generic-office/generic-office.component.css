@@ -7,3 +7,31 @@
     margin: 5px;
     padding: 10px;
   }
+
+  .right-align {
+    display: flex; /* Utilizza Flexbox */
+    justify-content: flex-end; /* Allinea gli elementi alla fine del contenitore */
+    padding:20px;
+  }
+
+  .search-field{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .plus-button {
+    margin-top: 16px; /* Assicura un allineamento verticale simile al campo di input */
+    margin-right: 20px;
+    margin-bottom: 30px;
+    background-color: #d2d2d2; /* Colore di sfondo grigio */
+    border-radius: 4px; /* Bordo arrotondato */
+    height: 40px; /* Altezza simile al campo di input */
+    min-width: 40px; /* Larghezza minima */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .plus-button:hover {
+    background-color: #e0e0e0; /* Cambia il colore di sfondo al passaggio del mouse */
+  }
