@@ -1,19 +1,30 @@
 <h2 mat-dialog-title>CARICA UN NUOVO MODULO</h2>
 <mat-dialog-content>
     <form [formGroup]="uploadForm" class="orient-fields">
-            <mat-form-field>
-              <mat-label>Nome modulo</mat-label>
-              <input matInput formControlName="name">
+            <mat-form-field class="space-fields">
+              <mat-label>Nome doc</mat-label>
+              <input matInput formControlName="nome">
+              <mat-error *ngIf="uploadForm.get('nome')!.hasError('required')">
+                Campo nome obbligatorio
+              </mat-error>
             </mat-form-field>
-            <mat-form-field class="example-full-width">
+            <mat-form-field>
               <mat-label>Descrizione</mat-label>
-              <textarea matInput rows="4" placeholder="Inserisci il testo..." formControlName="description"></textarea>
+              <textarea matInput rows="4" placeholder="Inserisci il testo..." formControlName="descrizione"></textarea>
+            </mat-form-field>
+            <mat-form-field class="space-fields">
+              <mat-label>Tipo</mat-label>
+              <mat-select formControlName="tipo">
+                <mat-option *ngFor="let tipo of tipi " [value]="tipo.value">{{tipo.viewValue}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="uploadForm.get('tipo')!.hasError('required')">
+              Seleziona il tipo di documento
+            </mat-error>
             </mat-form-field>
             <input type="file" (change)="onFileSelected($event)">
-
+            <div class="orient-button">
+                <button mat-button mat-dialog-close>Cancella</button>
+                <button mat-button (click)="closeDialog()">Carica</button>
+            </div>
       </form>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancella</button>
-  <button mat-button mat-dialog-close cdkFocusInitial (click) = "upload()">Carica</button>
-</mat-dialog-actions>

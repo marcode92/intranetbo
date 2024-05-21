@@ -50,3 +50,8 @@ export interface officeTable {
     
 }
 
+export interface SelectField {
+    value: string;
+    viewValue: string;
+  }
+

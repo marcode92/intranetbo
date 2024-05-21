@@ -55,6 +55,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import { UploadModuleDialogComponent } from './components/uffici/generic-office/upload-module-dialog/upload-module-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import { UploadModuleDialogComponent } from './components/uffici/generic-office/
     PdfJsViewerModule,
     MatSidenavModule,
     MatTreeModule,
+    MatFormFieldModule,    
     MatInputModule,
     MatCardModule,
     MatDatepickerModule, 
